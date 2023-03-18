@@ -103,7 +103,7 @@ class OrderGetCreate(Resource):
         description='Get All Students'
     )
     @jwt_required()
-    @admin_required
+    @admin_required()
     def get(self):
         """
 
@@ -120,7 +120,7 @@ class OrderGetCreate(Resource):
         description='Create A Student'
     )
     @jwt_required()
-    @admin_required
+    @admin_required()
     def post(self):
         """
            Create A Student
@@ -210,6 +210,7 @@ class GetUpdateDelete(Resource):
             params = {'order_id': 'An ID For A Student'}
     )
     @jwt_required()
+    @admin_required()
     def delete(self, student_id):
         """
 
