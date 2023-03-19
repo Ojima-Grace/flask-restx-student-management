@@ -10,15 +10,6 @@ import string
 import random
 from functools import wraps
 
-def admin_required(func):
-    @wraps(func)
-    def decorated(*args, **kwargs):
-        current_user = get_jwt_identity()
-        if not current_user.get('is_admin'):
-            abort(403, 'You must be an admin to access this resource')
-        return func(*args, **kwargs)
-    return decorated
-
 student_namespace = Namespace('student', description='Namespace for Student Operations')
 
 student_model = student_namespace.model(
@@ -103,7 +94,6 @@ class OrderGetCreate(Resource):
         description='Get All Students'
     )
     @jwt_required()
-    @admin_required()
     def get(self):
         """
 
@@ -120,7 +110,6 @@ class OrderGetCreate(Resource):
         description='Create A Student'
     )
     @jwt_required()
-    @admin_required()
     def post(self):
         """
            Create A Student
@@ -210,7 +199,6 @@ class GetUpdateDelete(Resource):
             params = {'order_id': 'An ID For A Student'}
     )
     @jwt_required()
-    @admin_required()
     def delete(self, student_id):
         """
 
