@@ -156,25 +156,25 @@ class GetUpdateDelete(Resource):
     @student_namespace.expect(edit_password_model)
     @student_namespace.marshal_with(student_model)
     @student_namespace.doc(
-        description = 'Update A Student Password By ID',
+        description = 'Update Student Paddword By ID',
         params = {'Student_ID': 'An ID For A Student'}
     )
     @jwt_required()
     def put(self, student_id):
         """
 
-           Student Please Update Your Password
+           Student Update Your Password
 
         """
-        student_to_update = Student.get_by_id(student_id)
+        student_password_update = Student.get_by_id(student_id)
 
         data = student_namespace.payload
 
-        student_to_update.password = data["password"]
+        student_password_update.password = data["password"]
 
         db.session.commit()
 
-        return student_to_update, HTTPStatus.OK
+        return student_password_update, HTTPStatus.OK
     
     @student_namespace.expect(edit_student_model)
     @student_namespace.marshal_with(student_model)
