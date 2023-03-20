@@ -40,7 +40,7 @@ class UserTestCase(unittest.TestCase):
         headers = {
             "Authorization": f"Bearer {token}"
         }
-        response = self.client.get('/student/studentss', headers=headers)
+        response = self.client.get('/student/students', headers=headers)
 
         assert response.status_code == 200
         assert response.json == []
