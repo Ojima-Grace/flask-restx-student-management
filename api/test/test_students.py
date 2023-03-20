@@ -22,7 +22,15 @@ class StudentTestCase(unittest.TestCase):
         self.appctx.pop()
         self.app = None
         self.client = None
-
+    
+    def test_get_all_students(self):
+        token = create_access_token(identity='testuser')
+        headers = {
+            "Authorization": f"Bearer {token}"
+        }
+        response = self.client.get('/student/students', headers=headers)
+        assert response.status_code == 200
+        assert response.json == []
 
     def test_student_login(self):
         data = {

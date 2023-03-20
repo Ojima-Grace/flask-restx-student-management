@@ -3,7 +3,6 @@ from .. import create_app
 from ..config.config import config_dict
 from ..utils import db
 from werkzeug.security import generate_password_hash
-from ..utils import db
 from flask_jwt_extended import create_access_token
 from ..models.course import Course
 
