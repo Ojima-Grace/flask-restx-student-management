@@ -8,7 +8,7 @@ from flask_jwt_extended import create_access_token
 import random
 import string
 
-class StudentTestCase(unittest.TestCase):
+class UserTestCase(unittest.TestCase):
     def setUp(self):
         self.app = create_app(config=config_dict['test'])
         self.appctx = self.app.app_context()
@@ -22,6 +22,18 @@ class StudentTestCase(unittest.TestCase):
         self.appctx.pop()
         self.app = None
         self.client = None
+
+
+
+    def test_student_login(self):
+        data = {
+            "email": "test@test.com.com",
+            "password": "password"
+        }
+
+        response = self.client.post('student/login', json=data)
+
+        assert response.status_code == 200
     
     def test_get_all_students(self):
         token = create_access_token(identity='testuser')
@@ -50,13 +62,3 @@ class StudentTestCase(unittest.TestCase):
         student_id = student[0].id
         assert student_id == 1
         assert len(student) == 1
-
-    def test_student_login(self):
-        data = {
-            "email": "test@test.com.com",
-            "password": "password"
-        }
-
-        response = self.client.post('student/login', json=data)
-
-        assert response.status_code == 200
