@@ -230,4 +230,4 @@ class Logout(Resource):
         """
         unset_jwt_cookies
         db.session.commit()
-        return {"Message": "Logged out already!"}, HTTPStatus.OK
+        return {"Message": "Logged out successfully!"}, HTTPStatus.OK
