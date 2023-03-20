@@ -28,9 +28,28 @@ class StudentTestCase(unittest.TestCase):
         headers = {
             "Authorization": f"Bearer {token}"
         }
-        response = self.client.get('/student/students', headers=headers)
+        response = self.client.get('/student/studentss', headers=headers)
+
         assert response.status_code == 200
         assert response.json == []
+
+    def test_create_a_student(self):
+        data = {
+            "username": "teststudent",
+            "email": "test@student.com",
+            "password": "kiki",
+            "student_id": "A2023"
+        }
+        token = create_access_token(identity="testuser")
+        headers = {
+            'Authorization': f'Bearer {token}'
+        }
+        response = self.client.post('/student/students', json=data, headers=headers)
+        assert response.status_code == 201
+        student = Student.query.all()
+        student_id = student[0].id
+        assert student_id == 1
+        assert len(student) == 1
 
     def test_student_login(self):
         data = {
@@ -38,6 +57,6 @@ class StudentTestCase(unittest.TestCase):
             "password": "password"
         }
 
-        response = self.client.post('auth/login', json=data)
+        response = self.client.post('student/login', json=data)
 
         assert response.status_code == 200

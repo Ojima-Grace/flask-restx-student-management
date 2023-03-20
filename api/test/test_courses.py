@@ -22,7 +22,7 @@ class UserTestCase(unittest.TestCase):
         self.client = None
 
     def test_get_all_courses(self):
-        token = create_access_token(identity='ojima')
+        token = create_access_token(identity='testuser')
         headers = {
             "Authorization": f"Bearer {token}"
         }
@@ -37,7 +37,7 @@ class UserTestCase(unittest.TestCase):
             "teacher": "test"
         }
 
-        token = create_access_token(identity="ojima")
+        token = create_access_token(identity="testuser")
         headers = {
             "Authorization": f"Bearer {token}"
         }
@@ -54,7 +54,7 @@ class UserTestCase(unittest.TestCase):
             teacher = "test"
         )
         course.save()
-        token = create_access_token(identity='ojima')
+        token = create_access_token(identity='testuser')
         headers = {
             'Authorization': f'Bearer {token}'
         }
@@ -64,10 +64,10 @@ class UserTestCase(unittest.TestCase):
     def test_delete_course_by_id(self):
         course = Course(
             course_name = "Python",
-            teacher = "test"
+            teacher = "Bashir"
         )
         course.save()
-        token = create_access_token(identity='ojima')
+        token = create_access_token(identity='testuser')
         headers = {
             'Authorization': f'Bearer {token}'
         }
