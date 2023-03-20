@@ -75,7 +75,7 @@ class EnrollmentResource(Resource):
 
 @enrollment_namespace.route('/course/<int:course_id>/students')
 class GetAllCourseStudents(Resource):
-    @enrollment_namespace.expect(enrollment_model)
+    #@enrollment_namespace.expect(enrollment_model)
     @enrollment_namespace.marshal_with(enrollment_model)
     @enrollment_namespace.doc(
         description='List all students registered in a course',
