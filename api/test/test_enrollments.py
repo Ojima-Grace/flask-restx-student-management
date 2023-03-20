@@ -6,6 +6,7 @@ from werkzeug.security import generate_password_hash
 from ..models.enrollment import Enrollment
 from ..models.course import Course
 from ..models.student import Student
+from flask_jwt_extended import create_access_token
 
 class EnrollmentTestCase(unittest.TestCase):
     def setUp(self):
@@ -21,6 +22,15 @@ class EnrollmentTestCase(unittest.TestCase):
         self.appctx.pop()
         self.app = None
         self.client = None
+
+    def test_get_all_enrollments(self):
+        token = create_access_token(identity='testuser')
+        headers = {
+            "Authorization": f"Bearer {token}"
+        }
+        response = self.client.get('/enrollment/enrollmentss', headers=headers)
+        assert response.status_code == 200
+        assert response.json == []
 
     def test_enrollment(self):
         response = self.client.post('/course/1/2')
