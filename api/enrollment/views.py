@@ -39,9 +39,15 @@ class OrderGetCreate(Resource):
 
         return enrollment, HTTPStatus.OK
     
-@enrollment_namespace.route('/<int:course_id>/<int:student_id>')
+@enrollment_namespace.route('/course/<int:course_id>/student/<int:student_id>')
 class EnrollmentResource(Resource):
     #@enrollment_namespace.marshal_with(enrollment_model)
+    @enrollment_namespace.doc(
+            description = 'Student Enroll',
+            params = {'Course_ID': 'An ID For A Course',
+                      'Student_ID': 'An ID For A Student'
+                     }
+    )
     @jwt_required()
     def post(self, course_id, student_id):
         """
@@ -67,12 +73,14 @@ class EnrollmentResource(Resource):
 
         return {"message": "Congratulations! You are now enrolled"}, HTTPStatus.CREATED.value
 
-@enrollment_namespace.route('/<int:course_id>/students')
+@enrollment_namespace.route('/course/<int:course_id>/students')
 class GetAllCourseStudents(Resource):
     @enrollment_namespace.expect(enrollment_model)
     @enrollment_namespace.marshal_with(enrollment_model)
     @enrollment_namespace.doc(
-        description='List all students registered in a course'
+        description='List all students registered in a course',
+        params = {'Course_ID': 'An ID For A Course'
+                 }
     )
     @jwt_required()
     def get(self, course_id):

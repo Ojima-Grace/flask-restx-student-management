@@ -30,6 +30,12 @@ studentt_model = student_namespace.model(
         'email': fields.String(required=True, description="An Email")
     }
 )
+
+edit_password_model = student_namespace.model(
+    'PasswordStudent', {
+        'password': fields.String(required=True, description="A Password")
+    }
+)
 edit_student_model = student_namespace.model(
     'EditStudent', {
         'grade': fields.Integer(required=True, description="Student Grade"),
@@ -134,7 +140,7 @@ class GetUpdateDelete(Resource):
     @student_namespace.marshal_with(student_model)
     @student_namespace.doc(
         description = 'Retrieve A Student By ID',
-        params = {'Course_id': 'An ID For A Student'}
+        params = {'Student_ID': 'An ID For A Student'}
     )
     @jwt_required()
     def get(self, student_id):
@@ -146,10 +152,11 @@ class GetUpdateDelete(Resource):
         student = Student.get_by_id(student_id)
 
         return student, HTTPStatus.OK
-
+    @student_namespace.expect(edit_password_model)
+    @student_namespace.marshal_with(student_model)
     @student_namespace.doc(
         description = 'Update A Student Password By ID',
-        params = {'order_id': 'An ID For A Student'}
+        params = {'Student_ID': 'An ID For A Student'}
     )
     @jwt_required()
     def put(self, student_id):
@@ -172,7 +179,7 @@ class GetUpdateDelete(Resource):
     @student_namespace.marshal_with(student_model)
     @student_namespace.doc(
         description = 'Update A Student Records By ID',
-        params = {'order_id': 'An ID For A Student'}
+        params = {'student_ID': 'An ID For A Student'}
     )
     @jwt_required()
     def put(self, student_id):
@@ -196,7 +203,7 @@ class GetUpdateDelete(Resource):
     @student_namespace.marshal_with(student_model)
     @student_namespace.doc(
             description = 'Delete Student',
-            params = {'order_id': 'An ID For A Student'}
+            params = {'student_ID': 'An ID For A Student'}
     )
     @jwt_required()
     def delete(self, student_id):
