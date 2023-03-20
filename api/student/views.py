@@ -152,6 +152,7 @@ class GetUpdateDelete(Resource):
         student = Student.get_by_id(student_id)
 
         return student, HTTPStatus.OK
+    
     @student_namespace.expect(edit_password_model)
     @student_namespace.marshal_with(student_model)
     @student_namespace.doc(
@@ -188,16 +189,16 @@ class GetUpdateDelete(Resource):
            Upddate Student Records
 
         """
-        student_to_update = Student.get_by_id(student_id)
+        student_update = Student.get_by_id(student_id)
 
         data = student_namespace.payload
 
-        student_to_update.grade = data["grade"]
-        student_to_update.gpa = data["gpa"]
+        student_update.grade = data["grade"]
+        student_update.gpa = data["gpa"]
 
         db.session.commit()
 
-        return student_to_update, HTTPStatus.OK
+        return student_update, HTTPStatus.OK
     
     @student_namespace.expect(student_model)
     @student_namespace.marshal_with(student_model)
