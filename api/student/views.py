@@ -88,7 +88,7 @@ class Refresh(Resource):
 
 @student_namespace.route('/students')
 class OrderGetCreate(Resource):
-    @student_namespace.expect(student_model)
+    #@student_namespace.expect(student_model)
     @student_namespace.marshal_with(student_model)
     @student_namespace.doc(
         description='Get All Students'
