@@ -13,7 +13,7 @@ from functools import wraps
 student_namespace = Namespace('student', description='Namespace for Student Operations')
 
 student_model = student_namespace.model(
-    'CreateStudent', {
+    'Student', {
         'id': fields.Integer(),
         'username': fields.String(required=True, description="A Username"),
         'email': fields.String(required=True, description="An Email"),
@@ -104,7 +104,7 @@ class OrderGetCreate(Resource):
 
         return student, HTTPStatus.OK
     
-    @student_namespace.expect(student_model)
+    @student_namespace.expect(studentt_model)
     @student_namespace.marshal_with(student_model)
     @student_namespace.doc(
         description='Create A Student'
