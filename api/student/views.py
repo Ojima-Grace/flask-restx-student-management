@@ -136,7 +136,7 @@ class OrderGetCreate(Resource):
         return new_student, HTTPStatus.CREATED
 
 @student_namespace.route('/student/<int:student_id>')
-class GetUpdateDelete(Resource):
+class GetUpdateUpdateDelete(Resource):
     @student_namespace.marshal_with(student_model)
     @student_namespace.doc(
         description = 'Retrieve A Student By ID',
