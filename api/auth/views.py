@@ -160,7 +160,7 @@ class GetDelete(Resource):
     #     return admin_update, HTTPStatus.OK
     
     #@auth_namespace.expect(admin_model)
-    @auth_namespace.marshal_with(admin_model)
+    #@auth_namespace.marshal_with(admin_model)
     @auth_namespace.doc(
             description = 'Delete Admin',
             params = {'Admin_ID': 'An ID For An Admin'}
