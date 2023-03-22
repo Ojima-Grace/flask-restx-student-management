@@ -47,6 +47,12 @@ class SignUp(Resource):
         """
         data = request.get_json()
 
+        existing_admin = Admin.objects(username=data.get('username')).first()
+
+        if existing_admin:
+            return {'message': 'Username already exists. Please choose another username.'}, HTTPStatus.BAD_REQUEST
+
+
         new_admin = Admin(
             username = data.get('username'),
             email = data.get('email'),
