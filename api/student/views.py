@@ -178,26 +178,6 @@ class GetUpdateDelete(Resource):
 
         return student_update, HTTPStatus.OK
     
-    #@student_namespace.expect(student_model)
-    #@student_namespace.marshal_with(student_model)
-    @student_namespace.doc(
-            description = 'Delete Student',
-            params = {'Student_ID': 'An ID For A Student'}
-    )
-    @jwt_required()
-    def delete(self, student_id):
-        """
-
-           Delete a Student by Id
-
-        """
-        student_to_delete = Student.get_by_id(student_id)
-        student_to_delete.delete()
-
-        return {"message": "Student Deleted Successfully!"}, HTTPStatus.OK
-    
-@student_namespace.route('/student/<int:student_id>')
-class GetUpdateDelete(Resource):
     @student_namespace.expect(edit_password_model)
     @student_namespace.marshal_with(student_model)
     @student_namespace.doc(
@@ -221,6 +201,25 @@ class GetUpdateDelete(Resource):
 
         return student_password_update, HTTPStatus.OK
 
+    
+    #@student_namespace.expect(student_model)
+    #@student_namespace.marshal_with(student_model)
+    @student_namespace.doc(
+            description = 'Delete Student',
+            params = {'Student_ID': 'An ID For A Student'}
+    )
+    @jwt_required()
+    def delete(self, student_id):
+        """
+
+           Delete a Student by Id
+
+        """
+        student_to_delete = Student.get_by_id(student_id)
+        student_to_delete.delete()
+
+        return {"message": "Student Deleted Successfully!"}, HTTPStatus.OK
+    
 
 @student_namespace.route('/logout')
 class Logout(Resource):
