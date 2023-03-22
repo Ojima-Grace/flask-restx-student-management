@@ -115,6 +115,67 @@ class Refresh(Resource):
         access_token = create_access_token(identity=username)
 
         return {'access_token': access_token}, HTTPStatus.OK
+    
+@auth_namespace.route('/admin/<int:admin_id>')
+class GetUpdateDelete(Resource):
+    @auth_namespace.marshal_with(admin_model)
+    @auth_namespace.doc(
+        description = 'Retrieve An Admin By ID',
+        params = {'Admin_ID': 'An ID For A Admin'}
+    )
+    @jwt_required()
+    def get(self, admin_id):
+        """
+
+           Retrieving An Admin by Id
+
+        """
+        admin = Admin.get_by_id(admin_id)
+
+        return admin, HTTPStatus.OK
+    
+    
+    # @auth_namespace.expect(edit_admin_model)
+    # @auth_namespace.marshal_with(admin_model)
+    # @auth_namespace.doc(
+    #     description = 'Update An Admin By ID',
+    #     params = {'Admin_ID': 'An ID For An Admin'}
+    # )
+    # @jwt_required()
+    # def put(self, admin_id):
+    #     """
+
+    #        Upddate Admin
+
+    #     """
+    #     admin_update = Admin.get_by_id(admin_id)
+
+    #     data = auth_namespace.payload
+
+    #     admin_update.username = data["username"]
+    #     student_update.password = data["password"]
+
+    #     db.session.commit()
+
+    #     return admin_update, HTTPStatus.OK
+    
+    @auth_namespace.expect(admin_model)
+    @auth_namespace.marshal_with(admin_model)
+    @auth_namespace.doc(
+            description = 'Delete Admin',
+            params = {'Admin_ID': 'An ID For An Admin'}
+    )
+    @jwt_required()
+    def delete(self, admin_id):
+        """
+
+           Delete An Admin by Id
+
+        """
+        admin_to_delete = Admin.get_by_id(admin_id)
+        admin_to_delete.delete()
+
+        return {"message": "Admin Deleted Successfully!"}, HTTPStatus.OK
 
 @auth_namespace.route('/logout')
 class Logout(Resource):
