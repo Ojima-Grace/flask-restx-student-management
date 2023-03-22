@@ -9,7 +9,7 @@ import string
 import random
 
 
-auth_namespace = Namespace('auth', description='Namespace for Authentication and Admin Operations')
+auth_namespace = Namespace('auth', description='Namespace for Admin Authentication')
 
 signup_model = auth_namespace.model(
     'Signup', {
