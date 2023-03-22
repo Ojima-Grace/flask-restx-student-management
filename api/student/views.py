@@ -136,7 +136,7 @@ class OrderGetCreate(Resource):
         return new_student, HTTPStatus.CREATED
 
 @student_namespace.route('/student/<int:student_id>')
-class GetUpdateUpdateDelete(Resource):
+class GetUpdateDelete(Resource):
     @student_namespace.marshal_with(student_model)
     @student_namespace.doc(
         description = 'Retrieve A Student By ID',
@@ -178,28 +178,28 @@ class GetUpdateUpdateDelete(Resource):
 
         return student_update, HTTPStatus.OK
     
-    @student_namespace.expect(edit_password_model)
-    @student_namespace.marshal_with(student_model)
-    @student_namespace.doc(
-        description = 'Update Student Password By ID',
-        params = {'Student_ID': 'An ID For A Student'}
-    )
-    @jwt_required()
-    def put(self, student_id):
-        """
+    # @student_namespace.expect(edit_password_model)
+    # @student_namespace.marshal_with(student_model)
+    # @student_namespace.doc(
+    #     description = 'Update Student Password By ID',
+    #     params = {'Student_ID': 'An ID For A Student'}
+    # )
+    # @jwt_required()
+    # def put(self, student_id):
+    #     """
 
-           Student Update Your Password
+    #        Student Update Your Password
 
-        """
-        student_password_update = Student.get_by_id(student_id)
+    #     """
+    #     student_password_update = Student.get_by_id(student_id)
 
-        data = student_namespace.payload
+    #     data = student_namespace.payload
 
-        student_password_update.password = data["password"]
+    #     student_password_update.password = data["password"]
 
-        db.session.commit()
+    #     db.session.commit()
 
-        return student_password_update, HTTPStatus.OK
+    #     return student_password_update, HTTPStatus.OK
 
     
     #@student_namespace.expect(student_model)
