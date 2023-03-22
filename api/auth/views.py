@@ -117,7 +117,7 @@ class Refresh(Resource):
         return {'access_token': access_token}, HTTPStatus.OK
     
 @auth_namespace.route('/admin/<int:admin_id>')
-class GetUpdateDelete(Resource):
+class GetDelete(Resource):
     @auth_namespace.marshal_with(admin_model)
     @auth_namespace.doc(
         description = 'Retrieve An Admin By ID',
@@ -153,7 +153,7 @@ class GetUpdateDelete(Resource):
     #     data = auth_namespace.payload
 
     #     admin_update.username = data["username"]
-    #     student_update.password = data["password"]
+    #     admin_update.password = data["password"]
 
     #     db.session.commit()
 
