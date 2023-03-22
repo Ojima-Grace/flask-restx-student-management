@@ -36,6 +36,25 @@ login_model = auth_namespace.model(
         'password': fields.String(required=True, description="A Password")
     }
 )
+
+@auth_namespace.route('/students')
+class OrderGetCreate(Resource):
+    #@student_namespace.expect(student_model)
+    @auth_namespace.marshal_with(admin_model)
+    @auth_namespace.doc(
+        description='Get All Admins'
+    )
+    @jwt_required()
+    def get(self):
+        """
+
+           Get All Students
+
+        """
+        admins = Admin.query.all()
+
+        return admins, HTTPStatus.OK
+    
 @auth_namespace.route('/signup')
 class SignUp(Resource):
     @auth_namespace.expect(signup_model)
