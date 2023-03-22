@@ -37,7 +37,7 @@ login_model = auth_namespace.model(
     }
 )
 
-@auth_namespace.route('/students')
+@auth_namespace.route('/admins')
 class OrderGetCreate(Resource):
     #@student_namespace.expect(student_model)
     @auth_namespace.marshal_with(admin_model)
@@ -48,7 +48,7 @@ class OrderGetCreate(Resource):
     def get(self):
         """
 
-           Get All Students
+           Get All Admins
 
         """
         admins = Admin.query.all()
