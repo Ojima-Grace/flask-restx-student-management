@@ -159,7 +159,7 @@ class GetUpdateDelete(Resource):
 
     #     return admin_update, HTTPStatus.OK
     
-    @auth_namespace.expect(admin_model)
+    #@auth_namespace.expect(admin_model)
     @auth_namespace.marshal_with(admin_model)
     @auth_namespace.doc(
             description = 'Delete Admin',

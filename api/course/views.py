@@ -99,6 +99,7 @@ class GetUpdateDelete(Resource):
 
         return course_to_update, HTTPStatus.OK
     
+    @course_namespace.marshal_with(course_model)
     @course_namespace.doc(
             description = 'Delete A Course By ID',
             params = {'order_id': 'An ID For A Course'}

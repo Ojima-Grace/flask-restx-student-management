@@ -178,7 +178,7 @@ class GetUpdateDelete(Resource):
 
         return student_update, HTTPStatus.OK
     
-    @student_namespace.expect(student_model)
+    #@student_namespace.expect(student_model)
     @student_namespace.marshal_with(student_model)
     @student_namespace.doc(
             description = 'Delete Student',
