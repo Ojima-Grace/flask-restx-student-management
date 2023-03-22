@@ -181,7 +181,7 @@ class GetUpdateUpdateDelete(Resource):
     @student_namespace.expect(edit_password_model)
     @student_namespace.marshal_with(student_model)
     @student_namespace.doc(
-        description = 'Update Student Paddword By ID',
+        description = 'Update Student Password By ID',
         params = {'Student_ID': 'An ID For A Student'}
     )
     @jwt_required()
