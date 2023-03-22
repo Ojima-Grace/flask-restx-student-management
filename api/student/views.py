@@ -182,7 +182,7 @@ class GetUpdateDelete(Resource):
     #@student_namespace.marshal_with(student_model)
     @student_namespace.doc(
             description = 'Delete Student',
-            params = {'student_ID': 'An ID For A Student'}
+            params = {'Student_ID': 'An ID For A Student'}
     )
     @jwt_required()
     def delete(self, student_id):
